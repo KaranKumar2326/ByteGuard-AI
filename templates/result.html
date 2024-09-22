@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance & PII Detection Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .pii-box {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .pii-box pre {
+            font-size: 1rem;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        .pii-box h3 {
+            color: #374151;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .rounded-full {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .rounded-full:hover {
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-blue-800 h-screen p-6">
+            <img src="/static/images/Byteme.png" alt="Logo" class="w-20 h-20 mx-auto my-4">
+            <h2 class="text-2xl text-white font-bold mb-6">Dashboard</h2>
+            <ul class="space-y-4">
+                <li><a href="/home" class="text-blue-100 hover:text-white">Upload Document</a></li>
+                <li><a href="/" class="text-blue-100 hover:text-white">logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <div class="container mx-auto p-6">
+
+                <!-- Header -->
+                <header class="mb-10">
+                    <h1 class="text-5xl font-bold text-center text-gray-900">Compliance & PII Detection Results</h1>
+                    <p class="text-center text-gray-600 mt-2">Review your document for compliance with selected laws</p>
+                </header>
+                
+                <!-- Two column layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    <!-- Left: Document Viewer -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-800">Original Document    <button class="mt-10 text-center">
+                            <a href="/home" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-200">Upload Another Document</a>
+                        </button></h2>
+                        
+                        <!-- Display based on file type -->
+                        {% if filename.endswith('.pdf') %}
+                            <!-- Display PDF using iframe -->
+                            <iframe src="{{ url_for('uploaded_file', filename=filename) }}" width="100%" height="500px" class="rounded-lg border border-gray-300"></iframe>
+                        {% elif filename.endswith('.docx') %}
+                            <!-- Provide download link for DOCX -->
+                            <a href="{{ url_for('uploaded_file', filename=filename) }}" class="text-blue-600 underline">Download DOCX File</a>
+                        {% elif filename.endswith('.png') or filename.endswith('.jpg') or filename.endswith('.jpeg') %}
+                            <!-- Display image -->
+                            <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Image" class="w-full h-auto rounded-lg border border-gray-300">
+                        {% else %}
+                            <p class="text-red-600">Unsupported file format for viewing.</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Right: Compliance Summary -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-800">Compliance & PII Summary</h2>
+
+                        <div class="pii-box">
+                            
+                            <pre class="whitespace-pre-wrap">{{ pii_output }}</pre>
+                        </div>
+                        <div class="pii-box mt-6">
+                            <h3>Compliance Results:</h3>
+                            <pre class="whitespace-pre-wrap">{{ compliance_output }}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

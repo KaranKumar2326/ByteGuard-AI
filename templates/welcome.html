@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            background-image: url("{{ url_for('static', filename='images/Projectbg.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .welcome-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            padding: 0 3rem;
+        }
+
+        .welcome-content {
+            max-width: 600px;
+        }
+
+        .welcome-heading {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #f5f5f5;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.25rem;
+            color: #b2bacd;
+            margin-top: 1rem;
+        }
+
+        .notify-form {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .email-input {
+            padding: 1rem;
+            font-size: 1rem;
+            border-radius: 9999px;
+            border: 1px solid #E5E7EB;
+            width: 300px;
+            background-color: #F9FAFB;
+            outline: none;
+        }
+
+        .notify-btn {
+            background-color: #6366F1;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .notify-btn:hover {
+            transform: translateY(-3px);
+            background-color: #4F46E5;
+        }
+
+        .welcome-image {
+            max-width: 500px;
+            height: auto;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="welcome-container">
+        <!-- Left: Text Content -->
+        <div class="welcome-content">
+            <h1 class="welcome-heading">Hello Everyone </h1>
+            <p class="welcome-subtitle">Team Byte Me has developed a generative AI-based application that enhances productivity by automating document compliance checks for key data protection laws. This application, built using IBM Watsonx.ai with the Granite 13B model, allows users to upload various documents (PDF, DOCX, or image files) and assesses compliance against laws such as HIPAA, GDPR, and the DPDP (Digital Personal Data Protection) Indian Law 2022. It also detects personally identifiable information (PII). By leveraging Watsonx's AI-powered model, the application provides detailed compliance summaries, highlights gaps, and recommends corrective actions, improving productivity in regulatory audits.</p>
+
+            <div class="notify-form">
+                <button class="notify-btn" onclick="window.location.href='/home'">Get Started</button>
+            </div>
+        </div>
+
+        <!-- Right: Image -->
+        <div>
+            <img src="{{ url_for('static', filename='images/Byteme.png') }}" alt="Welcome Image" class="welcome-image" style="border-radius: 50%;" width="50%" height="50%"> <!-- Replace with your image -->
+        </div>
+        
+    </div>
+
+</body>
+</html>
