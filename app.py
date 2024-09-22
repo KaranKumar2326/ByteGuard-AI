@@ -26,7 +26,7 @@ API_KEY = os.getenv("API_KEY")
 
 
 # IBM API key
-API_KEY = "oJQVmWhUImBXkbN0V27CUJfEz5aQFZjKwpnf9XJm2OoA"
+
 
 # Watsonx API URL
 WATSONX_API_URL = "https://us-south.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29"
