@@ -1,0 +1,26 @@
+# ByteGuard AI .gitignore
+
+# ByteGuard-AI specific
+# uploads/       # Folder where uploaded files are stored
+*.env          # Environment variables (API keys, secrets)
+
+# Python
+*.py[cod]
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+ENV/
+env/
+venv.bak/
+
+# Editor and system files
+.DS_Store
+.idea/
+.vscode/
+*.swp
